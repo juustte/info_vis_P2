@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jusee's project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="variableLinks">
+    <!-- TODO: Change the Links and the text to the given variable -->
+    <a href="./index.html">Labour Unions</a>
+    <a href="./press.html">The Press</a>
+    <a href="">Variable 3</a>
+    <a href="">Variable 4</a>
+    <a href="">Variable 5</a>
+    <a href="">Variable 6</a>
+    <a href="">Variable 7</a>
+    <a href="">Variable 8</a>
+  </div>
+  <div class="graph">
+  </div>
+  <div>
+    analytic trial
+  </div>
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
+  <script src="functions.js"></script>
+  <script>
+
+    // DOCUMENTATION:
+    // Each HTML file represents the visualization to a given variable.
+    // This one contains the one corresponding to the Press variable.
+    // You want to create a new HTML file to each variable (8 in total).
+    // - Copy the content of this file to the new HTML file.
+    // - Rename the HTML file. For example: politicalparties.html
+    // - (Keep the first one index.html!)
+    // - Change the code everywhere you can see the "TODO:" comment.
+    // - In the HTML part above: Change the links and the text of the links to
+    //    each of your html files. (Do this after you created all the files.)
+    // - Under the div with class graph, you can write your analytic trail with HTML.
+
+    /// params
+
+    var color_na = d3.rgb("#d4d4d4");
+    // only works if array.length-1 is between 3 and 9 (d3 color scheme)
+    var quantiles = [0, 0.2, 0.4, 0.6, 0.8, 1];
+    var waves = ['1981-1984','1990-1994','1995-1999','2000-2004','2005-2009','2010-2014'];
+    var init_wave = 0;
+
+    // TODO: Change the variable text to the given variable that is in your data
+    // - this will appear in the headline on top
+    var variable = "The Press";
+
+    // TODO: Change the name of the JSON file.
+    // - List of the filenames:
+    // ['./labour_unions.json','./press.json','./police.json','./parliament.json',
+    //  './churches.json','./armed_forces.json','./major_companies.json','./justice_system.json']
+    var filename = "press.json";
+
+    // TODO: Change the name below, to the first text of your JSON files.
+    // - List of the names in the JSON files:
+    // ['Labour_Unions','Press','Police','Parliament','Churches','Armed_Forces',
+    //  'Major_Companies','Justice_System']
+    var jsonName = "Press";
+
+    //------
+    var headline = "The level of distrust in " + variable + " between ";
+
+    /// main
+
+    // slider
+    var yearSlider = d3.select(".graph").insert("p", ":first-child").attr("class", "yearSlider");
+
+    yearSlider.append("h3")
+      .attr("class", "label")
+      .html('Select wave:');
+
+    yearSlider.append("input")
+      .attr("type", "range")
+      .attr("min", "0")
+      .attr("max", "5")
+      .attr("value", init_wave)
+      .attr("id", "year");
+
+
+    d3.select(".graph").insert("h2", ":first-child").text(headline + waves[init_wave]);
+
+    // init map container, projection
+    var width = 960, height = 425;
+    var svg_map = d3.select(".graph").insert("svg")
+                  .attr("id", "map")
+                  .attr("height", height)
+                  .attr("width", width);
+    var path = d3.geoPath(d3.geoRobinson());
+
+    // init legend container
+    svg_map.append("g")
+        .attr("class", "legend");
+    svg_map.append("g")
+        .attr("class", "legend_title")
+        .append("text");
+
+    // init bars container
+    var margin = {top: 50, right:10, bottom:50, left:30};
+    var svgBarsWidth = 960 - margin.left - margin.right,
+        svgBarsHeight = 200 - margin.top - margin.bottom;
+
+    var x = d3.scaleBand()
+                .rangeRound([0, svgBarsWidth])
+                .padding(.05);
+    var y = d3.scaleLinear().range([svgBarsHeight, 0]);
+
+    var svg_bars = d3.select(".graph")
+        .append("svg")
+          .attr("id", "bars")
+          .attr("width", svgBarsWidth + margin.left + margin.right)
+          .attr("height", svgBarsHeight + margin.top + margin.bottom)
+        .append("g")
+          .attr("class", "bars")
+          .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+    // load data
+    d3.json(filename, function(error, d) {
+
+      if (error) throw error;
+
+      let data_all = d[jsonName];
+
+      let data = data_all[waves[init_wave]];
+      let color = calcColorScale(data);
+
+      // load map data and render it
+      d3.json("world.json", function(error, worldmap) {
+        if (error) throw error;
+
+        // init map
+        svg_map.append("g")
+          .attr("class", "countries")
+          .selectAll("path")
+          .data(topojson.feature(worldmap, worldmap.objects.world).features)
+          .enter().append("path")
+            .attr("d", path)
+            .attr("id", function(d) { return d.id; })
+            .call(fillMap, color, data)
+          .append("title")
+            .call(setPathTitle, data);
+
+        // init legend
+        renderLegend(color, data);
+        renderBars(color, data);
+      }); // map data
+
+      // was the slider used?
+      d3.select("#year").on("input", function() {
+        let upd_color = calcColorScale(data_all[waves[this.value]]);
+        updateMap(upd_color, data_all[waves[this.value]]);
+        renderLegend(upd_color, data_all[waves[this.value]]);
+        renderBars(upd_color, data_all[waves[this.value]]);
+      });
+
+    }); // disaster data
+
+  </script>
+</body>
+</html>

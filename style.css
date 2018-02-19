@@ -1,0 +1,42 @@
+body{
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.variableLinks {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.graph {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.yearSlider {
+  display: flex;
+  align-items: center;
+}
+
+p{
+  font-size: 10pt;
+  margin-left:20px;
+}
+.countries{
+  stroke: #fff;
+}
+.legend rect{
+  stroke: #000;
+}
+
+.legend, .legend_title text{
+  font-size:10pt;
+}
+
+.barlabel {
+  font-size:8pt;
+  text-anchor: middle;
+
+}

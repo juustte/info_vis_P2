@@ -1,0 +1,9 @@
+{
+  "name": "jusee-info-viz-project-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "csv-parse": "^2.0.4"
+  }
+}

@@ -48,5 +48,6 @@ p{
 
 .image_container img {
   width: 30%;
+  height: 30%;
   border: 1px solid lightgrey;
 }

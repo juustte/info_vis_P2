@@ -112,22 +112,22 @@ const createJSON = (countries) => {
 // Load all files for the CSVs
 const inputLabour = fs.readFileSync('./labour_unions.csv')
 const inputPress = fs.readFileSync('./press.csv')
-// const inputPolice = fs.readFileSync('./police.csv')
-// const inputParliament = fs.readFileSync('./parliament.csv')
-// const inputChurches = fs.readFileSync('./churches.csv')
-// const inputArmedForces = fs.readFileSync('./armed_forces.csv')
-// const inputCompanies = fs.readFileSync('./major_companies.csv')
-// const inputJustice = fs.readFileSync('./justice_system.csv')
+const inputPolice = fs.readFileSync('./police.csv')
+const inputParliament = fs.readFileSync('./parliament.csv')
+const inputChurches = fs.readFileSync('./churches.csv')
+const inputArmedForces = fs.readFileSync('./armed_forces.csv')
+const inputCompanies = fs.readFileSync('./major_companies.csv')
+const inputJustice = fs.readFileSync('./justice_system.csv')
 
 // Interpret the CSV files and transform into JS objects
 const dataLabour = parse(inputLabour, { columns: true, delimiter: ',' })
 const dataPress = parse(inputPress, { columns: true, delimiter: ',' })
-// const dataPolice = parse(inputPolice, { columns: true, delimiter: ',' })
-// const dataParliament = parse(inputParliament, { columns: true, delimiter: ',' })
-// const dataChurches = parse(inputChurches, { columns: true, delimiter: ',' })
-// const dataArmedForces = parse(inputArmedForces, { columns: true, delimiter: ',' })
-// const dataCompanies = parse(inputCompanies, { columns: true, delimiter: ',' })
-// const dataJustice = parse(inputJustice, { columns: true, delimiter: ',' })
+const dataPolice = parse(inputPolice, { columns: true, delimiter: ',' })
+const dataParliament = parse(inputParliament, { columns: true, delimiter: ',' })
+const dataChurches = parse(inputChurches, { columns: true, delimiter: ',' })
+const dataArmedForces = parse(inputArmedForces, { columns: true, delimiter: ',' })
+const dataCompanies = parse(inputCompanies, { columns: true, delimiter: ',' })
+const dataJustice = parse(inputJustice, { columns: true, delimiter: ',' })
 
 // Create the final JSON with the Data Manipulation functions above
 const labourJSON = ({
@@ -136,31 +136,31 @@ const labourJSON = ({
 const pressJSON = ({
   'Press': createJSON(createCountries(dataPress.map(completeData))),
 })
-// const policeJSON = ({
-//   'Police': createJSON(createCountries(dataPolice.map(completeData))),
-// })
-// const parliamentJSON = ({
-//   'Parliament': createJSON(createCountries(dataParliament.map(completeData))),
-// })
-// const churchesJSON = ({
-//   'Churches': createJSON(createCountries(dataChurches.map(completeData))),
-// })
-// const armedForcesJSON = ({
-//   'Armed_Forces': createJSON(createCountries(dataArmedForces.map(completeData))),
-// })
-// const companiesJSON = ({
-//   'Major_Companies': createJSON(createCountries(dataCompanies.map(completeData))),
-// })
-// const justiceJSON = ({
-//   'Justice_System': createJSON(createCountries(dataJustice.map(completeData))),
-// })
+const policeJSON = ({
+  'Police': createJSON(createCountries(dataPolice.map(completeData))),
+})
+const parliamentJSON = ({
+  'Parliament': createJSON(createCountries(dataParliament.map(completeData))),
+})
+const churchesJSON = ({
+  'Churches': createJSON(createCountries(dataChurches.map(completeData))),
+})
+const armedForcesJSON = ({
+  'Armed_Forces': createJSON(createCountries(dataArmedForces.map(completeData))),
+})
+const companiesJSON = ({
+  'Major_Companies': createJSON(createCountries(dataCompanies.map(completeData))),
+})
+const justiceJSON = ({
+  'Justice_System': createJSON(createCountries(dataJustice.map(completeData))),
+})
 
 // Write the JSON files onto the hard drive aka. Creating the JSON files
 fs.writeFileSync('./labour_unions.json', JSON.stringify(labourJSON, null, 2) , 'utf-8')
 fs.writeFileSync('./press.json', JSON.stringify(pressJSON, null, 2) , 'utf-8')
-// fs.writeFileSync('./police.json', JSON.stringify(policeJSON, null, 2) , 'utf-8')
-// fs.writeFileSync('./parliament.json', JSON.stringify(parliamentJSON, null, 2) , 'utf-8')
-// fs.writeFileSync('./churches.json', JSON.stringify(churchesJSON, null, 2) , 'utf-8')
-// fs.writeFileSync('./armed_forces.json', JSON.stringify(armedForcesJSON, null, 2) , 'utf-8')
-// fs.writeFileSync('./major_companies.json', JSON.stringify(companiesJSON, null, 2) , 'utf-8')
-// fs.writeFileSync('./justice_system.json', JSON.stringify(justiceJSON, null, 2) , 'utf-8')
+fs.writeFileSync('./police.json', JSON.stringify(policeJSON, null, 2) , 'utf-8')
+fs.writeFileSync('./parliament.json', JSON.stringify(parliamentJSON, null, 2) , 'utf-8')
+fs.writeFileSync('./churches.json', JSON.stringify(churchesJSON, null, 2) , 'utf-8')
+fs.writeFileSync('./armed_forces.json', JSON.stringify(armedForcesJSON, null, 2) , 'utf-8')
+fs.writeFileSync('./major_companies.json', JSON.stringify(companiesJSON, null, 2) , 'utf-8')
+fs.writeFileSync('./justice_system.json', JSON.stringify(justiceJSON, null, 2) , 'utf-8')

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jusee's project</title>
+  <title>Jusy's project</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,14 +13,54 @@
     <!-- TODO: Change the Links and the text to the given variable -->
     <a href="./index.html">Labour Unions</a>
     <a href="./press.html">The Press</a>
-    <a href="">Variable 3</a>
-    <a href="">Variable 4</a>
-    <a href="">Variable 5</a>
-    <a href="">Variable 6</a>
-    <a href="">Variable 7</a>
-    <a href="">Variable 8</a>
+    <a href="./police.html">The Police</a>
+    <a href="./parliament.html">The Parliament</a>
+    <a href="./churches.html">Churches</a>
+    <a href="./armed_forces.html">Armed Forces</a>
+    <a href="./major_companies.html">Major Companies</a>
+    <a href="./justice_system.html">Justice System</a>
   </div>
   <div class="graph">
+
+  </div>
+  <div align="middle">
+  <h1>Analytic Trial</h1>
+  <p><font size="3">The visualization shows the difference in distrust of various organizations all over the world
+    in 6 different periods from 1981 to 2014. The data was collected from
+    <a href="http://www.worldvaluessurvey.org/WVSOnline.jsp">World Values Survey</a>.</font></p>
+    <img src="./IMG/WVS_scrsh.jpg" width="600" height="212">
+
+  <h2>Analysis and Reflections</h2>
+  <p><font size="3"> 1. Poland is considered as a very religious country, although from 1990 to 2014 the distrust of churches increased by 24%.</font></p>
+  <div class="image_container">
+    <img src="./IMG/churches_pl1990.png">
+    <img src="./IMG/churches_pl2010.png">
+  </div>
+  <p><font size="3"> 2. Since 1995, the distrust of the press in USA continues to be over 70%, which is very high.</font></p>
+  <p><font size="3"> 3. Argentina and Sweden are completely opposite in the level of distrust of the police. While Argentina's level maintain
+    between 70 and 80% in all waves, for Sweden it's around 20%.</font></p>
+  <div class="image_container">
+      <img src="./IMG/police_arg2010.png">
+      <img src="./IMG/police_swe2010.png">
+  </div>
+  <p><font size="3"> 4. In 10 years from 1981 the distrust of the parliament in Argentina increased by 56,2%. A similar situation took place in
+    Egypt, since 2000 the distrust increased by 43,2%. Big changes had to happen.</font></p>
+  <div class="image_container">
+        <img src="./IMG/parl_egy2000.png">
+        <img src="./IMG/parl_egy2010.png">
+  </div>
+  <p><font size="3"> 5. Since 2005, the increased distrust of major companies is easily noticeable in Europe as well as in North America, west of South America,
+    Australia and in northern african countries.</font></p>
+  <div class="image_container">
+          <img src="./IMG/majcomp2005.png">
+          <img src="./IMG/majcomp2010.png">
+  </div>
+
+
+  <h2>The Process</h2>
+  <p><font size="3">The data about countries Confidence of various organizations was firstly prepared in spreadsheets.
+    The base code of the visualization was taken from <a href="http://bl.ocks.org/tomschulze/961d57bd1bbd2a9ef993f2e8645cb8d2">here</a>.
+    The data was added and the base was edited; the possibility of filtering variables was implemented at the top of the page.</font></p>
 
   </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -67,7 +107,7 @@
     var jsonName = "Labour_Unions";
 
     //------
-    var headline = "The level of distrust in " + variable + " between ";
+    var headline = "The level of distrust of " + variable + " between ";
 
     /// main
 

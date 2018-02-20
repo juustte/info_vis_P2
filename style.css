@@ -40,3 +40,13 @@ p{
   text-anchor: middle;
 
 }
+
+.image_container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.image_container img {
+  width: 30%;
+  border: 1px solid lightgrey;
+}

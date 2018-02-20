@@ -6,12 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jusy's project</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-  .my_text
-  {
-    font-family: calibri
-  }
-  </style>
 </head>
 
 <body>
@@ -29,13 +23,13 @@
   <div class="graph">
   </div>
   <div align="middle">
-	<h1>Analytic Trial</h1>
-	<p><font size="3">The visualization shows the difference in distrust of various organizations all over the world
+  <h1>Analytic Trial</h1>
+  <p><font size="3">The visualization shows the difference in distrust of various organizations all over the world
     in 6 different periods from 1981 to 2014. The data was collected from
     <a href="http://www.worldvaluessurvey.org/WVSOnline.jsp">World Values Survey</a>.</font></p>
     <img src="./IMG/WVS_scrsh.jpg" width="600" height="212">
 
-	<h2>Analysis and Reflections</h2>
+  <h2>Analysis and Reflections</h2>
   <p><font size="3"> 1. Poland is considered as a very religious country, although from 1990 to 2014 the distrust of churches increased by 24%.</font></p>
   <div class="image_container">
     <img src="./IMG/churches_pl1990.png">
@@ -62,13 +56,12 @@
   </div>
 
 
-	<h2>The Process</h2>
-	<p><font size="3">The data about countries Confidence of various organizations was firstly prepared in spreadsheets.
+  <h2>The Process</h2>
+  <p><font size="3">The data about countries Confidence of various organizations was firstly prepared in spreadsheets.
     The base code of the visualization was taken from <a href="http://bl.ocks.org/tomschulze/961d57bd1bbd2a9ef993f2e8645cb8d2">here</a>.
     The data was added and the base was edited; the possibility of filtering variables was implemented at the top of the page.</font></p>
 
   </div>
-
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://d3js.org/topojson.v2.min.js"></script>
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -98,19 +91,19 @@
 
     // TODO: Change the variable text to the given variable that is in your data
     // - this will appear in the headline on top
-    var variable = "The Press";
+    var variable = "The Parliament";
 
     // TODO: Change the name of the JSON file.
     // - List of the filenames:
     // ['./labour_unions.json','./press.json','./police.json','./parliament.json',
     //  './churches.json','./armed_forces.json','./major_companies.json','./justice_system.json']
-    var filename = "./press.json";
+    var filename = "./parliament.json";
 
     // TODO: Change the name below, to the first text of your JSON files.
     // - List of the names in the JSON files:
     // ['Labour_Unions','Press','Police','Parliament','Churches','Armed_Forces',
     //  'Major_Companies','Justice_System']
-    var jsonName = "Press";
+    var jsonName = "Parliament";
 
     //------
     var headline = "The level of distrust of " + variable + " between ";
@@ -151,12 +144,12 @@
 
     // init bars container
     var margin = {top: 50, right:10, bottom:50, left:30};
-    var svgBarsWidth = 950 - margin.left - margin.right,
+    var svgBarsWidth = 960 - margin.left - margin.right,
         svgBarsHeight = 200 - margin.top - margin.bottom;
 
     var x = d3.scaleBand()
                 .rangeRound([0, svgBarsWidth])
-                .padding(.0,7);
+                .padding(.05);
     var y = d3.scaleLinear().range([svgBarsHeight, 0]);
 
     var svg_bars = d3.select(".graph")
@@ -207,7 +200,7 @@
         renderBars(upd_color, data_all[waves[this.value]]);
       });
 
-    }); // disaster data
+    });
 
   </script>
 </body>
